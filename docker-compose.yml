@@ -1,0 +1,19 @@
+services:
+  spark:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: big_data_pipeline:latest
+    container_name: spark_pipeline
+    volumes:
+      - ./:/app
+      - ./data:/app/data
+      - ./logs:/app/logs
+    environment:
+      - PYSPARK_PYTHON=/opt/spark-venv/bin/python
+      - PYSPARK_DRIVER_PYTHON=/opt/spark-venv/bin/python
+      - SPARK_LOCAL_HOSTNAME=localhost
+      - SPARK_MASTER=local[2]
+    ports:
+      - "8081:8080"  # Spark UI
+    working_dir: /app

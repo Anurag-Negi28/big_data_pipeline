@@ -1,0 +1,30 @@
+# Pipeline Configuration
+
+spark:
+  app_name: "BigDataPipeline"
+  master: "local[*]"
+  executor_memory: "2g"
+  driver_memory: "1g"
+
+data:
+  raw_data_path: "data/raw/"
+  processed_data_path: "data/processed/"
+  output_data_path: "data/output/"
+
+ingestion:
+  batch_size: 1000
+  file_format: "csv"
+
+processing:
+  partition_columns:
+    - "date"
+    - "category"
+  cache_tables: true
+
+serving:
+  output_format: "parquet"
+  api_port: 8080
+
+logging:
+  level: "DEBUG"
+  file_path: "logs/pipeline.log"
